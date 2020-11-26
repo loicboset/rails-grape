@@ -3,7 +3,8 @@ module BookStore
     class Book < Grape::Entity
       expose :isbn
       expose :title
-      expose :stock 
-    end 
+      expose :stock
+      expose :flows, using: BookStore::Entities::Flow
+    end
   end
 end

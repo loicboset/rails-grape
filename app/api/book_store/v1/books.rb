@@ -14,12 +14,29 @@ module BookStore
         end
 
         desc 'Return a specific book'
-        route_param :id do 
-          get do 
+        route_param :id do
+          get do
             book = Book.find(params[:id])
             present book, with: BookStore::Entities::Book
-          end 
+          end
+          
+          resource :flows do 
+            desc 'Create a new flow'
+            params do
+              requires :flow, type: Hash do
+                requires :newStock, type: Integer, desc: 'New Stock'
+                requires :previousStock, type: Integer, desc: 'Previous Stock'
+              end
+            end
+            post do
+              @book = Book.find(params[:id])
+              @flow = Flow.new(params[:flow])
+              @flow = @book.flows.create!(params[:flow])
+              @book.update(stock: @flow.newStock)
+            end
+          end
         end
+
 
       end
 
