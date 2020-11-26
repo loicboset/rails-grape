@@ -4,13 +4,25 @@ module BookStore
       version 'v1', using: :path
       format :json
       prefix :api
+
       resource :books do
+
         desc 'Return list of books'
         get do
           books = Book.all
           present books
         end
+
+        desc 'Return a specific book'
+        route_param :id do 
+          get do 
+            book = Book.find(params[:id])
+            present book, with: BookStore::Entities::Book
+          end 
+        end
+
       end
+
     end
   end
 end
