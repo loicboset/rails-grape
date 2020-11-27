@@ -34,6 +34,9 @@ gem 'grape'
 gem 'grape-entity'
 gem 'grape_on_rails_routes'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
+gem 'grape-swagger'
+gem 'grape-swagger-entity', '~> 0.3'
+gem 'rack-cors'
 
 
 gem 'autoprefixer-rails'
